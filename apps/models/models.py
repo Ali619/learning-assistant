@@ -20,3 +20,6 @@ class AIModel(models.Model):
 
     def __str__(self):
         return f"Model {self.model_name} - Type {self.model_type}"
+
+    class Meta:
+        db_table = 'ai_models'
