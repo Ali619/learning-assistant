@@ -1,0 +1,6 @@
+SECRET_KEY=django_key # "3&dyf=v%3+$&#l17..."
+DATABASE_HOST=db_host
+DATABASE_NAME=db_name
+DATABASE_USER=db_user_name
+DATABASE_PASS=db_password
+DATABASE_PORT=db_port # default is 5432
