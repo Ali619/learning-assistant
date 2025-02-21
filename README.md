@@ -47,9 +47,44 @@ Run the following command to start PostgreSQL and pgAdmin:
 docker-compose up -d
 ```
 Once the database is running, connect to PostgreSQL and install the `pgvector` extension:
-```bash
-docker exec -it $(docker ps -qf "ancestor=postgres:14") psql -U postgres -d postgres -c "CREATE EXTENSION IF NOT EXISTS vector;"
+
+---
+You need to create the pgvector extension in your PostgreSQL database first. Since we're using Django with a PostgreSQL database, you have two options:
+
+**1. Create a migration to install the extension:**
+
+Create a new migration file (you can name it something like `0002_create_vector_extension.py` in your app's migrations folder):
+
+```python
+from django.db import migrations
+
+class Migration(migrations.Migration):
+    dependencies = [
+        # Replace 'your_app' with your app name and the previous migration
+        ('your_app', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.RunSQL(
+            "CREATE EXTENSION IF NOT EXISTS vector",
+            "DROP EXTENSION IF EXISTS vector"
+        )
+    ]
 ```
+**2. Or connect to your database directly and create the extension:** (Using psql command line)
+```bash
+psql -h localhost -U postgres -d postgres
+```
+Then run:
+```sql
+CREATE EXTENSION vector;
+```
+
+After creating the extension, run your migrations again:
+```bash
+python manage.py migrate
+```
+
 This will start:
 - **PostgreSQL** on port `5432`
 - **pgAdmin** on `http://localhost:5050` (Login: `admin@example.com`, Password: `admin`)
