@@ -7,8 +7,8 @@ from apps.models.models import AIModel
 
 
 class Message(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL)
-    model = models.ForeignKey(AIModel, on_delete=models.SET_NULL)
+    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    model = models.ForeignKey(AIModel, on_delete=models.SET_NULL, null=True)
     session_id = models.IntegerField(blank=True, null=True)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
