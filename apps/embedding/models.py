@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from pgvector.django import VectorField
 
 
 class DocumetnType(models.Model):
@@ -35,4 +36,11 @@ class Documetns(models.Model):
         return f"Document {self.id} - type {self.document_type} - created at {self.created_at}"
 
     class Meta:
-        db_table = "documents"
+        db_table = "document"
+
+
+class DocumentEmbedding(models.Model):
+    embedding = VectorField(1536)
+
+    class Meta:
+        db_table = "document_embedding"
