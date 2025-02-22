@@ -3,7 +3,7 @@
 **Learning Assistant** is a Django-based platform designed for students to manage and interact with AI models. Users can upload API keys from various chatbot service providers or create their own AI models with customized prompts, configurations, and development tools.
 
 ## 🚧 Project Status: Under Development
-This project is still in its early stages, and many features are under development. We appreciate any contributions, feedback, and suggestions to help improve the project.
+This project is still in its early stages, and many features are under development. I appreciate any contributions, feedback, and suggestions to help improve the project.
 
 ## Features (Planned and In-Progress)
 - Upload API keys from chatbot providers.
@@ -136,7 +136,7 @@ docker-compose down
 To stop the Django server, press `CTRL + C` in the terminal.
 
 ## Contributing
-We welcome contributions to this project! Since the project is still under development, here are some ways you can help:
+I welcome contributions to this project! Since the project is still under development, here are some ways you can help:
 1. Report bugs and suggest features by opening an issue.
 2. Fork the repository and submit pull requests with improvements.
 3. Help refine the documentation as new features are added.
