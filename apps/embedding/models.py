@@ -6,12 +6,12 @@ from django.utils import timezone
 from pgvector.django import VectorField
 
 
-class DocumetnType(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class DocumentType(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
     name = models.CharField(max_length=255,
                             unique=True)
     description = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_created=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     disable_at = models.DateTimeField(blank=True, null=True)
     last_modifier_id = models.IntegerField(blank=True, null=True)
 
@@ -19,13 +19,15 @@ class DocumetnType(models.Model):
         db_table = "document_type"
 
 
-class Documetns(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    document_type = models.ForeignKey(DocumetnType, on_delete=models.CASCADE)
+class Documents(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
+    document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
 
-    creator_id = models.IntegerField()
-    last_modifier_id = models.IntegerField(blank=True, null=True)
+    creator = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="documents_created")
+    last_modifier = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name="documents_modified")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -40,7 +42,14 @@ class Documetns(models.Model):
 
 
 class DocumentEmbedding(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
+    document_id = models.ForeignKey(
+        Documents, on_delete=models.SET_NULL, null=True)
+    title = models.CharField(max_length=255, blank=True, null=True)
     embedding = VectorField(1536)
+
+    def __str__(self):
+        return f"emnedd into {self.embedding} dim"
 
     class Meta:
         db_table = "document_embedding"
