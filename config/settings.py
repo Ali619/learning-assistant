@@ -29,6 +29,10 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
+# Providers' URL
+GOOGLE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
