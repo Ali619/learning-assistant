@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "rest_framework_simplejwt",
     'pgvector',
+    'drf_yasg',
     'apps.embedding',
     'apps.models',
     'apps.chat'
