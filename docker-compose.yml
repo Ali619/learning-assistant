@@ -1,17 +1,23 @@
 version: '3.8'
+
 services:
   postgres:
     image: pgvector/pgvector:pg14
+    container_name: postgres_db
+    restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+
   pgadmin:
     image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -20,6 +26,5 @@ services:
     depends_on:
       - postgres
 
-volumes:
+  volumes:
   pgdata:
-    driver: local
